@@ -6,7 +6,7 @@ var tag = process.argv[3];
 var file1 = "report/" + id + ".csv";
 var file2 = "ntes/" + id + ".cvs";
 
-var profile = 0.00000001;
+var profile = undefined;
 var profile2 = 0;
 var marketValue = 1;
 var increase1 = 0;
@@ -74,6 +74,7 @@ function getMarketValue()
 
 function display()
 {
+	if (profile)  
 	console.log(id + " " + profile + " " + marketValue + " " + marketValue / profile + " " + increase1 + " " + increase2);
 }
 if (tag)
