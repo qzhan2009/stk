@@ -32,6 +32,9 @@ function convert()
 	lineReader.on('close', function() {
 		console.log("date,revenue,profile");
 		for (i=0; i<d.length; i++) {
+
+			if (r[i] == "--" || p[i] == "--")
+				break;
 			console.log(d[i] +"," + r[i] + "," + p[i]);
 		}
 	});
