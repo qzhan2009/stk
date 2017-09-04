@@ -19,7 +19,7 @@ function load()
         var $ = jquery(window);
             
         var fs = require('fs');
-        
+
         var rows = $("#dt_1 tbody").find("tr");
 
         if (rows.length == 0)

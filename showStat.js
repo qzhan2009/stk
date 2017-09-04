@@ -5,12 +5,18 @@ var id = process.argv[2];
 var tag = process.argv[3];
 var file1 = "report/" + id + ".csv";
 var file2 = "ntes/" + id + ".cvs";
+var file3 = "forecast/" + id + ".json";
 
 var profile = undefined;
 var profile2 = 0;
+var revenue = undefined;
+var revenue2 = 0;
 var marketValue = 1;
 var increase1 = 0;
 var increase2 = 0;
+var r_increase1 = 0;
+var r_increase2 = 0;
+var f_profile = undefined;
 
 function loadData()
 {
@@ -27,16 +33,23 @@ function loadData()
 		tokens = line.split(",");
 		if (tokens[0] == tag) {
 			profile = parseFloat(tokens[2]) / 10000;
+			revenue = parseFloat(tokens[1]);
 			target1 = i+1;
 			target4 = i+4;
 			target5 = i+5; 
 		}
-		else if (i==target1)
-			profile2 = parseFloat(tokens[2]) / 10000;	
-		else if (i==target4)
+		else if (i==target1) {
+			revenue2 = parseFloat(tokens[1]);
+			profile2 = parseFloat(tokens[2]) / 10000;
+		}
+		else if (i==target4) {
 			increase1 = profile / ( parseFloat(tokens[2]) / 10000 );
-		else if (i==target5)
+			r_increase1 = revenue / (parseFloat(tokens[1]));
+		}
+		else if (i==target5) {
 			increase2 = profile2 / ( parseFloat(tokens[2]) / 10000 );
+			r_increase2 = revenue2 / (parseFloat(tokens[1]));
+		}
 	});
 
 	lineReader.on('close', function() {
@@ -45,6 +58,24 @@ function loadData()
 
 }
 
+function getForecast()
+{
+	fs.readFile(file3, 'utf8', function(err, data) {
+        	if (err) throw err;
+                obj = JSON.parse(data);
+                obj.Result.yctj.data.forEach(function(entry) {
+                	if (entry.rq == "2017年预测") {
+                        	if (entry.jlr.indexOf("亿") != -1)
+					f_profile = parseFloat(entry.jlr);
+                                else if (entry.jlr.indexOf("万") != -1)
+                                        f_profile = parseFloat(entry.jlr) / 10000;
+                        }
+                });
+		if (f_profile)
+			display();
+	});
+
+}
 
 function getMarketValue()
 {
@@ -65,8 +96,7 @@ function getMarketValue()
 	});
 
 	lineReader.on('close', function() {
-		
-		display();
+		getForecast();	
 	});
 
 
@@ -75,7 +105,7 @@ function getMarketValue()
 function display()
 {
 	if (profile)  
-	console.log(id + " " + profile + " " + marketValue + " " + marketValue / profile + " " + increase1 + " " + increase2);
+	console.log(id + " " + profile + " " + marketValue + " " + marketValue / profile + " " + increase1 + " " + increase2 + " " + revenue + " " + r_increase1 + " " + r_increase2 + " " + f_profile + " " + marketValue / f_profile );
 }
 if (tag)
 	loadData();
