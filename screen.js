@@ -2,6 +2,27 @@ var fs = require("fs");
 var rl = require("readline");
 
 var file = process.argv[2];
+var file2 = process.argv[3];
+
+var blacklist = [];
+var pe_thresh = 60;
+var fpe_thresh = 30;
+
+function loadBlacklist()
+{
+	var lineReader = rl.createInterface({
+		input: fs.createReadStream(file2),
+	});
+
+	lineReader.on('line', function(line) {
+		blacklist.push(line);
+	});
+
+	lineReader.on('close', function() {
+		loadData();
+	});	
+	
+}
 
 function loadData()
 {
@@ -18,10 +39,14 @@ function loadData()
 		r_ins1 = parseFloat(tokens[7], 10);
 		r_ins2 = parseFloat(tokens[8], 10);
 		fpe = parseFloat(tokens[10], 10);
+		fpe2 = parseFloat(tokens[12], 10);
 
-		if (pe > 50)
+		if (blacklist.includes(tokens[0]))
 			return;
-		if (fpe > 25)
+		
+		if (pe > pe_thresh)
+			return;
+		if (fpe > fpe_thresh)
 			return;
 		if (ins1 < 0 || ins2 < 0)
 			return;
@@ -33,9 +58,15 @@ function loadData()
 
 		if (r_ins1 < 1.1)
 			return;
+
+		if (fpe / pe < 0.4)
+			return;
+
+		if (fpe / fpe2 < 1.1)
+			return;
 		
 		console.log(line);
 	});
 }
 
-loadData();
+loadBlacklist();

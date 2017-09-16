@@ -10,6 +10,9 @@ var file3 = "forecast/" + id + ".json";
 var profile = undefined;
 var profile2 = 0;
 var revenue = undefined;
+var debet = undefined;
+var d_rate = undefined;
+var cash = undefined;
 var revenue2 = 0;
 var marketValue = 1;
 var increase1 = 0;
@@ -17,6 +20,7 @@ var increase2 = 0;
 var r_increase1 = 0;
 var r_increase2 = 0;
 var f_profile = undefined;
+var f_profile2 = undefined;
 
 function loadData()
 {
@@ -34,6 +38,9 @@ function loadData()
 		if (tokens[0] == tag) {
 			profile = parseFloat(tokens[2]) / 10000;
 			revenue = parseFloat(tokens[1]);
+			debet = parseFloat(tokens[3]) / 10000;
+			cash = parseFloat(tokens[5]) / 10000;
+			d_rate = parseFloat(tokens[3]) / parseFloat(tokens[4]); 
 			target1 = i+1;
 			target4 = i+4;
 			target5 = i+5; 
@@ -70,8 +77,15 @@ function getForecast()
                                 else if (entry.jlr.indexOf("万") != -1)
                                         f_profile = parseFloat(entry.jlr) / 10000;
                         }
+			else if (entry.rq == "2018年预测") {
+                        	if (entry.jlr.indexOf("亿") != -1)
+					f_profile2 = parseFloat(entry.jlr);
+                                else if (entry.jlr.indexOf("万") != -1)
+                                        f_profile2 = parseFloat(entry.jlr) / 10000;
+                        }
+
                 });
-		if (f_profile)
+		if (f_profile && f_profile2)
 			display();
 	});
 
@@ -105,7 +119,7 @@ function getMarketValue()
 function display()
 {
 	if (profile)  
-	console.log(id + " " + profile + " " + marketValue + " " + marketValue / profile + " " + increase1 + " " + increase2 + " " + revenue + " " + r_increase1 + " " + r_increase2 + " " + f_profile + " " + marketValue / f_profile );
+	console.log(id + " " + profile + " " + marketValue + " " + marketValue / profile + " " + increase1 + " " + increase2 + " " + revenue + " " + r_increase1 + " " + r_increase2 + " " + f_profile + " " + marketValue / f_profile + " " + f_profile2 + " " + marketValue / f_profile2 + " " + debet + " " + (debet + marketValue - cash) / profile + " " + d_rate + " " + cash);
 }
 if (tag)
 	loadData();
