@@ -56,6 +56,7 @@ function loadData()
 		else if (i==target5) {
 			increase2 = profile2 / ( parseFloat(tokens[2]) / 10000 );
 			r_increase2 = revenue2 / (parseFloat(tokens[1]));
+			lineReader.close();
 		}
 	});
 
