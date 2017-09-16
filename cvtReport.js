@@ -15,7 +15,7 @@ var c = [];
 
 function display()
 {		
-	console.log("date,revenue,profile,debet,debet_rate,cash");
+	console.log("#date,revenue,profile,debet,debet_rate,cash");
 	for (i=0; i<d.length; i++) {
 
 		if (r[i] == "--" || p[i] == "--")
