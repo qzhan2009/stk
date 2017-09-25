@@ -6,21 +6,21 @@ var file1 = "financial/" + id + ".csv";
 var file2 = "cash/" + id + ".csv";
 var tokens = [];
 
-var d = [];
+var dt = [];
 var r = [];
 var p = []; 
-var o = [];
-var dr = [];
+var d = [];
+var sd = [];
 var c = [];
 
 function display()
 {		
-	console.log("#date,revenue,profile,debet,debet_rate,cash");
+	console.log("#date,revenue,profile,debet,st_debet,cash");
 	for (i=0; i<d.length; i++) {
 
 		if (r[i] == "--" || p[i] == "--")
 			break;
-		console.log(d[i] +"," + r[i] + "," + p[i] + "," + o[i] + " " + dr[i] + " " + c[i]);
+		console.log(dt[i] +"," + r[i] + "," + p[i] + "," + d[i] + "," + sd[i] + "," + c[i]);
 	}
 }
 
@@ -58,15 +58,15 @@ function loadData1()
 		tokens = tokens.slice(1, tokens.length-1);
 		row++;
 		if (row == 1)
-			d = tokens;
+			dt = tokens;
 		else if (row == 5)
 			r = tokens;
 		else if (row == 11)
 			p = tokens;
 		else if (row == 17)
-			o = tokens;
-		else if (row == 15)
-			dr = tokens;
+			d = tokens;
+		else if (row == 18)
+			sd = tokens;
         });
 
 	lineReader.on('close', function() {

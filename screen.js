@@ -53,7 +53,9 @@ function loadData()
 		if (ins1 < ins2)
 			return;
 		
-		if (ins2 < 1.1)
+		if (ins2 < 0.7)
+			return;
+		if (ins1 < 1.1)
 			return;
 
 		if (r_ins1 < 1.1)
