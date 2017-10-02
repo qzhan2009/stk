@@ -7,6 +7,10 @@ var file = "report/" + id + ".csv";
 var d = [];
 var r = [];
 var p = [];
+var ttm_p = [];
+var ttm_r = [];
+var ttm_sm_p = [];
+var ttm_sm_r = [];
 
 function loadData()
 {
@@ -46,9 +50,24 @@ function processData()
                 else
                 	Q = 1;	
 
-		var ttm_p = p[i] + p[i+Q] - p[i+4];
-		var ttm_r = r[i] + r[i+Q] - r[i+4];
-		console.log(d[i] + " " + ttm_r + " " + ttm_p); 
+		ttm_p.push(p[i] + p[i+Q] - p[i+4]);
+		ttm_r.push(r[i] + r[i+Q] - r[i+4]);
+
+	}
+
+	var count = ttm_p.length;
+	var pre_r = ttm_r[count-1];
+	var pre_p = ttm_p[count-1];
+
+	for (i=count-1; i>=0; i--) {
+		ttm_sm_r[i] = (ttm_r[i] + pre_r * 3)/4;
+		ttm_sm_p[i] = (ttm_p[i] + pre_p * 3)/4;
+		pre_r = ttm_sm_r[i];
+		pre_p = ttm_sm_p[i];
+	}	
+
+	for (i=0; i<count; i++) {
+		console.log(d[i] + "," + ttm_r[i] + "," + ttm_p[i] + "," + ttm_sm_r[i] + "," + ttm_sm_p[i]);
 	}
 }
 
