@@ -2,6 +2,11 @@ var fs = require("fs");
 var rl = require("readline");
 
 var id = process.argv[2];
+var ebit = process.argv[3];
+var r_inc1 = process.argv[4];
+var r_inc3 = process.argv[5];
+var p_inc1 = process.argv[6];
+var p_inc3 = process.argv[7];
 var file1 = "report/" + id + ".csv";
 var file2 = "ntes/" + id + ".cvs";
 var file3 = "forecast/" + id + ".json";
@@ -123,7 +128,8 @@ function getVolume()
 function display()
 {
 	if (target_price)
-		console.log(id + " " + price + " " + target_price + " " + target_price / price + " " +
+		console.log(id + " " + ebit + " " + r_inc1 + " " + r_inc3 + " " + p_inc1 + " " + p_inc3 + " " + price + " " + target_price + " " + target_price / price + " " +
+
 			profile_ttm + " " + profile_2017 + " " + profile_2018 + " " + profile_2019 + " " + volume);
 }
 /*

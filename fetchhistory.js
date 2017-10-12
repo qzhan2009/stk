@@ -26,18 +26,17 @@ function loadData()
 	
 	
 	lineReader.on('line', function(line) {
+		var tokens = line.split(" ");
+		var id = parseInt(tokens[0]);
 		
-		var id = parseInt(line);
-
 		var code;
 
 		if (id > 600000)
-			code = "0" + line;
+			code = "0" + tokens[0];
 		else
-			code = "1" + line;
-
+			code = "1" + tokens[0];
 		var cmd = "wget \"http://quotes.money.163.com/service/chddata.html?code="+ code + 
-		"&start=" + start + "&end=" + end + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP\" -O ntes/" + line + ".cvs";
+		"&start=" + start + "&end=" + end + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP\" -O ntes/" + tokens[0] + ".cvs";
 
 		exec(cmd);
 

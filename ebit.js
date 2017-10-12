@@ -2,6 +2,10 @@ var fs = require("fs");
 var rl = require("readline");
 
 var id = process.argv[2];
+var r_inc1 = process.argv[3];
+var r_inc3 = process.argv[4];
+var p_inc1 = process.argv[5];
+var p_inc3 = process.argv[6];
 var file1 = "report/" + id + ".csv";
 var file2 = "ntes/" + id + ".cvs";
 
@@ -80,15 +84,13 @@ function getMarketValue()
 	lineReader.on('close', function() {
 		display();	
 	});
-
-
 }
 
 function display()
 {
 	var pe = (market_value + long_term_debet - cash) / profile_ttm;
 	if (pe > 0)
-	console.log(id + " " + pe + " " + market_value + " " + profile_ttm + " " + long_term_debet + " " + cash); 
+	console.log(id + " " + pe + " " + r_inc1  + " " + r_inc3 + " " + p_inc1 + " " + p_inc3 + " " + market_value + " " + profile_ttm + " " + long_term_debet + " " + cash); 
 }
 /*
 function displayHeader()

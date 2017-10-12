@@ -5,11 +5,12 @@ var file = process.argv[2];
 
 var lines=[];
 var ids =[];
-var lins=[];
-var pe=[];
-var p_ins=[];
-var r_ins=[];
-var fpe=[];
+var ebit=[];
+var r_inc1=[];
+var r_inc3=[];
+var p_inc1=[];
+var p_inc3=[];
+var forecast = [];
 
 function pk()
 {
@@ -17,10 +18,10 @@ function pk()
 	{
 		for (j=i+1; j<lines.length; j++)
 		{
-			if (pe[i] < pe[j] && p_ins[i] > p_ins[j] && r_ins[i] > p_ins[j] && fpe[i] < fpe[j] )
-				console.log(ids[j] + " " + ids[i]); 
-			if (pe[i] > pe[j] && p_ins[i] < p_ins[j] && r_ins[i] < p_ins[j] && fpe[i] > fpe[j] )
+			if (ebit[i] < ebit[j] && forecast[i] > forecast[j] && r_inc1[i] > r_inc1[j] && r_inc3[i] > r_inc3[j] && p_inc1[i] > p_inc1[j] && p_inc3[i] > p_inc3[j])
 				console.log(ids[i] + " " + ids[j]); 
+			if (ebit[i] > ebit[j] && forecast[i] < forecast[j] && r_inc1[i] < r_inc1[j] && r_inc3[i] < r_inc3[j] && p_inc1[i] < p_inc1[j] && p_inc3[i] < p_inc3[j])
+				console.log(ids[j] + " " + ids[i]); 
 		}
 	}	
 }
@@ -36,12 +37,12 @@ function loadData()
 
 		lines.push(line);
 		ids.push(tokens[0]);
-		pe.push(parseFloat(tokens[3],10));
-		p_ins.push(parseFloat(tokens[4], 10));
-		r_ins.push(parseFloat(tokens[7], 10));
-		fpe.push(parseFloat(tokens[12], 10));
-
-
+		ebit.push(parseFloat(tokens[1],10));
+		r_inc1.push(parseFloat(tokens[2],10));
+		r_inc3.push(parseFloat(tokens[3],10));
+		p_inc1.push(parseFloat(tokens[4],10));
+		p_inc3.push(parseFloat(tokens[5],10));
+		forecast.push(parseFloat(tokens[6], 10));
 	});
 
 	lineReader.on('close', function() {
