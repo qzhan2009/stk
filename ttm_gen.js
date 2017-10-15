@@ -7,7 +7,9 @@ var file = "report/" + id + ".csv";
 var d = [];
 var r = [];
 var p = [];
+var tp = [];
 var ttm_p = [];
+var ttm_tp = [];
 var ttm_r = [];
 var ttm_sm_p = [];
 var ttm_sm_r = [];
@@ -25,6 +27,7 @@ function loadData()
 		d.push(tokens[0]);
 		r.push(parseFloat(tokens[1]));
 		p.push(parseFloat(tokens[2]));
+		tp.push(parseFloat(tokens[3]));
 				
 	});
 
@@ -52,6 +55,7 @@ function processData()
 
 		ttm_p.push(p[i] + p[i+Q] - p[i+4]);
 		ttm_r.push(r[i] + r[i+Q] - r[i+4]);
+		ttm_tp.push(tp[i] + tp[i+Q] - tp[i+4]);
 
 	}
 
@@ -67,9 +71,8 @@ function processData()
 	}	
 
 	for (i=0; i<count; i++) {
-		console.log(d[i] + "," + ttm_r[i] + "," + ttm_p[i] + "," + ttm_sm_r[i] + "," + ttm_sm_p[i]);
+		console.log(d[i] + "," + ttm_r[i] + "," + ttm_p[i] + "," + ttm_sm_r[i] + "," + ttm_sm_p[i] + "," + ttm_tp[i]);
 	}
 }
 
 loadData();
-

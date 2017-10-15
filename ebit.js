@@ -30,14 +30,14 @@ function loadData()
 		var tokens = line.split(",");
 
 		if (i==0) {
-			debet = parseFloat(tokens[3] * 10000);
-			st_debet = parseFloat(tokens[4] * 10000);
+			debet = parseFloat(tokens[4] * 10000);
+			st_debet = parseFloat(tokens[5] * 10000);
 			long_term_debet = debet - st_debet;
-			cash = parseFloat(tokens[5] * 10000);
+			cash = parseFloat(tokens[6] * 10000);
 			i++;
 		}
 
-		profile.push(parseFloat(tokens[2]) * 10000);
+		profile.push(parseFloat(tokens[3]) * 10000);
 		if (!Q) {
 			date = tokens[0];
 			if (date.endsWith("12-31"))

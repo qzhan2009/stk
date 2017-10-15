@@ -8,19 +8,20 @@ var tokens = [];
 
 var dt = [];
 var r = [];
-var p = []; 
+var p = [];
+var tp = []; 
 var d = [];
 var sd = [];
 var c = [];
 
 function display()
 {		
-	console.log("#date,revenue,profile,debet,st_debet,cash");
+	console.log("#date,revenue,profile,t_profile,debet,st_debet,cash");
 	for (i=0; i<d.length; i++) {
 
-		if (r[i] == "--" || p[i] == "--")
+		if (r[i] == "--" || p[i] == "--" || tp =="--")
 			break;
-		console.log(dt[i] +"," + r[i] + "," + p[i] + "," + d[i] + "," + sd[i] + "," + c[i]);
+		console.log(dt[i] +"," + r[i] + "," + p[i] + "," + tp[i] + "," + d[i] + "," + sd[i] + "," + c[i]);
 	}
 }
 
@@ -63,6 +64,8 @@ function loadData1()
 			r = tokens;
 		else if (row == 11)
 			p = tokens;
+		else if (row == 10)
+			tp = tokens;
 		else if (row == 17)
 			d = tokens;
 		else if (row == 18)
