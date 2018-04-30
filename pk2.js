@@ -18,9 +18,9 @@ function pk()
 	{
 		for (j=i+1; j<lines.length; j++)
 		{
-			if (ebit[i] < ebit[j] && forecast[i] > forecast[j] && r_inc1[i] > r_inc1[j] && r_inc3[i] > r_inc3[j] && p_inc1[i] > p_inc1[j] && p_inc3[i] > p_inc3[j])
+			if (ebit[i] < ebit[j] && r_inc1[i] > r_inc1[j] && r_inc3[i] > r_inc3[j] && p_inc1[i] > p_inc1[j] && p_inc3[i] > p_inc3[j])
 				console.log(ids[i] + " " + ids[j]); 
-			if (ebit[i] > ebit[j] && forecast[i] < forecast[j] && r_inc1[i] < r_inc1[j] && r_inc3[i] < r_inc3[j] && p_inc1[i] < p_inc1[j] && p_inc3[i] < p_inc3[j])
+			if (ebit[i] > ebit[j] && r_inc1[i] < r_inc1[j] && r_inc3[i] < r_inc3[j] && p_inc1[i] < p_inc1[j] && p_inc3[i] < p_inc3[j])
 				console.log(ids[j] + " " + ids[i]); 
 		}
 	}	

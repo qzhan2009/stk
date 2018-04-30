@@ -64,8 +64,8 @@ function processData()
 	var pre_p = ttm_p[count-1];
 
 	for (i=count-1; i>=0; i--) {
-		ttm_sm_r[i] = (ttm_r[i] + pre_r * 3)/4;
-		ttm_sm_p[i] = (ttm_p[i] + pre_p * 3)/4;
+		ttm_sm_r[i] = (ttm_r[i] + pre_r )/2;
+		ttm_sm_p[i] = (ttm_p[i] + pre_p )/2;
 		pre_r = ttm_sm_r[i];
 		pre_p = ttm_sm_p[i];
 	}	

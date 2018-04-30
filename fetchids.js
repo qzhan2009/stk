@@ -11,7 +11,7 @@ var index = 1;
 
 function load()
 {
-    var url = "http://data.eastmoney.com/soft_new/bbsj/201609/yysj/gpdm/asc/" + index + ".html"
+    var url = "http://data.eastmoney.com/soft_new/bbsj/201709/yysj/gpdm/asc/" + index + ".html"
 
     jsdom.env(
     url, 

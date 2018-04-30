@@ -12,9 +12,9 @@ var file2 = "ntes/" + id + ".cvs";
 var file3 = "forecast/" + id + ".json";
 
 var profile_ttm = undefined;
-var profile_2017 = undefined;
 var profile_2018 = undefined;
 var profile_2019 = undefined;
+var profile_2020 = undefined;
 var price = undefined;
 var volume = undefined;
 var target_price = undefined;
@@ -63,15 +63,9 @@ function getForecast()
         	if (err) throw err;
                 obj = JSON.parse(data);
                 obj.Result.yctj.data.forEach(function(entry) {
-                	if (entry.rq == "2017年预测") {
+                	if (entry.rq == "2018年预测") {
                         	if (entry.jlr.indexOf("亿") != -1)
-					profile_2017 = parseFloat(entry.jlr) * 10000 * 10000 ;
-                                else if (entry.jlr.indexOf("万") != -1)
-                                        profile_2017 = parseFloat(entry.jlr) * 10000;
-                        }
-			else if (entry.rq == "2018年预测") {
-                        	if (entry.jlr.indexOf("亿") != -1)
-					profile_2018 = parseFloat(entry.jlr) * 10000 * 10000;
+					profile_2018 = parseFloat(entry.jlr) * 10000 * 10000 ;
                                 else if (entry.jlr.indexOf("万") != -1)
                                         profile_2018 = parseFloat(entry.jlr) * 10000;
                         }
@@ -81,15 +75,21 @@ function getForecast()
                                 else if (entry.jlr.indexOf("万") != -1)
                                         profile_2019 = parseFloat(entry.jlr) * 10000;
                         }
+			else if (entry.rq == "2020年预测") {
+                        	if (entry.jlr.indexOf("亿") != -1)
+					profile_2020 = parseFloat(entry.jlr) * 10000 * 10000;
+                                else if (entry.jlr.indexOf("万") != -1)
+                                        profile_2020 = parseFloat(entry.jlr) * 10000;
+                        }
 
                 });
-		if (profile_2018) {
+		if (profile_2019 & profile_2018) {
 			target_price = profile_ttm / volume;
 			//console.log("profile per share = " + target_price);
-			if (profile_2019) {
-				target_price = target_price * (8.5 + (profile_2018/profile_2017-1) *100 + (profile_2019/profile_2018-1) * 100);
+			if (profile_2020) {
+				target_price = target_price * (8.5 + (profile_2019/profile_2018-1) *100 + (profile_2020/profile_2019-1) * 100);
 			} else {
-				target_price = target_price * (8.5 + 2 * (profile_2018/profile_2017-1) * 100);
+				target_price = target_price * (8.5 + 2 * (profile_2019/profile_2018-1) * 100);
 			}	
 			display();
 		}
@@ -127,18 +127,11 @@ function getVolume()
 
 function display()
 {
-	if (target_price)
+
+	if (target_price && profile_ttm < profile_2018)
 		console.log(id + " " + ebit + " " + r_inc1 + " " + r_inc3 + " " + p_inc1 + " " + p_inc3 + " " + price + " " + target_price + " " + target_price / price + " " +
 
-			profile_ttm + " " + profile_2017 + " " + profile_2018 + " " + profile_2019 + " " + volume);
+			profile_ttm + " " + profile_2018 + " " + profile_2019 + " " + profile_2020 + " " + volume);
 }
-/*
-function displayHeader()
-{
-	console.log("#id price target_price rate ttm 2017 2018 2019");
-}
-*/
-
-//displayHeader();
 loadData();
 
